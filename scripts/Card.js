@@ -5,7 +5,6 @@ export default class Card {
     this._cardSelector = cardSelector;
   }
 
-  // Obtiene el template desde el HTML
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -13,20 +12,17 @@ export default class Card {
     return cardElement;
   }
 
-  // Configura los listeners de cada tarjeta
   _setEventListeners(card) {
     const deleteBtn = card.querySelector(".elements__delete");
     const image = card.querySelector(".cards__imagen");
     const heart = card.querySelector(".group__imagen");
 
-    // Eliminar tarjeta
     if (deleteBtn) {
       deleteBtn.addEventListener("click", () => {
         card.remove();
       });
     }
 
-    // Like
     if (heart) {
       heart.addEventListener("click", () => {
         const isLiked = heart.classList.toggle("liked");
@@ -36,7 +32,6 @@ export default class Card {
       });
     }
 
-    // Abrir popup de imagen
     if (image) {
       image.addEventListener("click", () => {
         import("./utils.js").then(({ abrirPopupImagen }) => {
@@ -46,10 +41,9 @@ export default class Card {
     }
   }
 
-  // Método público: devuelve la tarjeta completa
   generateCard() {
     const cardFragment = this._getTemplate();
-    const card = cardFragment.querySelector(".cards"); // nodo raíz
+    const card = cardFragment.querySelector(".cards");
 
     const image = card.querySelector(".cards__imagen");
     const title = card.querySelector(".group__text");

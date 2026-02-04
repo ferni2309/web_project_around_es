@@ -17,7 +17,6 @@ const closeButton = document.getElementById("popup-close");
 
 let currentAction = "";
 
-// Tarjetas iniciales
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -45,14 +44,12 @@ const initialCards = [
   },
 ];
 
-// Render inicial
 initialCards.forEach((data) => {
   const card = new Card(data, "#card-template");
   const cardElement = card.generateCard();
   cardsContainer.prepend(cardElement);
 });
 
-// Validación
 const validator = new FormValidator(
   {
     formSelector: ".form",
@@ -66,7 +63,6 @@ const validator = new FormValidator(
 );
 validator.enableValidation();
 
-// Funciones de popup formulario
 function abrirPopup(button) {
   popup.classList.add("popup--show");
 
@@ -87,7 +83,6 @@ function cerrarPopupFormulario() {
   popup.classList.remove("popup--show");
 }
 
-// Guardar datos del formulario
 guardarButton.addEventListener("click", (e) => {
   e.preventDefault();
   const val1 = input1.value.trim();
@@ -105,12 +100,10 @@ guardarButton.addEventListener("click", (e) => {
   cerrarPopupFormulario();
 });
 
-// Eventos de botones
 editButton.addEventListener("click", () => abrirPopup(editButton));
 addButton.addEventListener("click", () => abrirPopup(addButton));
 closeButton.addEventListener("click", cerrarPopupFormulario);
 
-// Cerrar popup imagen
 document
   .getElementById("image-popup-close")
   .addEventListener("click", cerrarPopupImagen);
