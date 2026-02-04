@@ -1,4 +1,4 @@
-# Tripleten web_project_around
+# Tripleten web_project_around_es
 
 ## 1. Descripción general
 
@@ -66,8 +66,8 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 
 ## 7. Enlace al proyecto
 
-🔗 [Ver en GitHub Pages](https://ferni2309.github.io/web_project_around/)
+🔗 [Ver en GitHub Pages](https://ferni2309.github.io/web_project_around_es/)
 
 ## 8. Repositorio
 
-🔗 [Código fuente en GitHub](https://github.com/ferni2309/web_project_around.git)
+🔗 [Código fuente en GitHub](https://github.com/ferni2309/web_project_around_es.git)
