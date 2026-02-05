@@ -34,7 +34,7 @@ export default class Card {
 
     if (image) {
       image.addEventListener("click", () => {
-        import("./utils.js").then(({ abrirPopupImagen }) => {
+        import("../scripts/utils.js").then(({ abrirPopupImagen }) => {
           abrirPopupImagen(image);
         });
       });
