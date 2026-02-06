@@ -22,7 +22,7 @@ const initialCards = [
   { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg" },
 ];
 
-// Popup de imagen
+
 const imagePopup = new PopupWithImage("#image-popup");
 imagePopup.setEventListeners();
 
@@ -30,7 +30,7 @@ const handleCardClick = (data) => {
   imagePopup.open(data);
 };
 
-// Section para tarjetas
+
 const cardSection = new Section(
   {
     items: initialCards,
@@ -44,16 +44,16 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-// UserInfo
+
 const userInfo = new UserInfo({
   nameSelector: "#profileName",
   jobSelector: "#profileAcerca",
 });
 
-// Variable de contexto
+
 let currentAction = "";
 
-// Popup reutilizado
+
 const popupForm = new PopupWithForm("#popup", (formData) => {
   if (currentAction === "edit") {
     userInfo.setUserInfo({
@@ -61,7 +61,7 @@ const popupForm = new PopupWithForm("#popup", (formData) => {
       job: formData.input2,
     });
   } else if (currentAction === "add") {
-    // Validación simple para el enlace
+
     if (!formData.input2.startsWith("http")) {
       alert("Por favor ingresa un enlace válido que empiece con http o https");
       return;
@@ -78,17 +78,17 @@ const popupForm = new PopupWithForm("#popup", (formData) => {
 });
 popupForm.setEventListeners();
 
-// Validación
+
 const formElement = document.querySelector("#popup .form");
 const formValidator = new FormValidator(validationConfig, formElement);
 formValidator.enableValidation();
 
-// Referencias
+
 const popupTitle = document.getElementById("popup-title");
 const input1 = document.getElementById("input1");
 const input2 = document.getElementById("input2");
 
-// Botón editar perfil
+
 const editButton = document.querySelector(".profile__EditButton");
 editButton.addEventListener("click", () => {
   currentAction = "edit";
@@ -96,7 +96,7 @@ editButton.addEventListener("click", () => {
   input1.value = "";
   input2.value = "";
 
-  // Cambiar type dinámicamente
+
   input1.type = "text";
   input2.type = "text";
 
@@ -108,7 +108,7 @@ editButton.addEventListener("click", () => {
   popupForm.open();
 });
 
-// Botón añadir tarjeta
+
 const addButton = document.querySelector(".profile__AddButton");
 addButton.addEventListener("click", () => {
   currentAction = "add";
@@ -116,7 +116,7 @@ addButton.addEventListener("click", () => {
   input1.value = "";
   input2.value = "";
 
-  // Cambiar type dinámicamente
+
   input1.type = "text";
   input2.type = "url";
 
