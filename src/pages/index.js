@@ -1,112 +1,129 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import { cerrarPopupImagen } from "../scripts/utils.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
-const cardsContainer = document.querySelector(".elements");
-const formElement = document.querySelector(".form");
-const profileName = document.getElementById("profileName");
-const profileAcerca = document.getElementById("profileAcerca");
-const editButton = document.querySelector(".profile__EditButton");
-const addButton = document.querySelector(".profile__AddButton");
-const guardarButton = document.getElementById("guardar");
-const popup = document.getElementById("popup");
+const validationConfig = {
+  inputSelector: ".form__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+const initialCards = [
+  { name: "Valle de Yosemite", link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg" },
+  { name: "Lago Louise", link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg" },
+  { name: "Montañas Calvas", link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg" },
+  { name: "Latemar", link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg" },
+  { name: "Parque Nacional de la Vanoise", link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg" },
+  { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg" },
+];
+
+// Popup de imagen
+const imagePopup = new PopupWithImage("#image-popup");
+imagePopup.setEventListeners();
+
+const handleCardClick = (data) => {
+  imagePopup.open(data);
+};
+
+// Section para tarjetas
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, "#card-template", handleCardClick);
+      const cardElement = card.generateCard();
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".elements"
+);
+cardSection.renderItems();
+
+// UserInfo
+const userInfo = new UserInfo({
+  nameSelector: "#profileName",
+  jobSelector: "#profileAcerca",
+});
+
+// Variable de contexto
+let currentAction = "";
+
+// Popup reutilizado
+const popupForm = new PopupWithForm("#popup", (formData) => {
+  if (currentAction === "edit") {
+    userInfo.setUserInfo({
+      name: formData.input1,
+      job: formData.input2,
+    });
+  } else if (currentAction === "add") {
+    // Validación simple para el enlace
+    if (!formData.input2.startsWith("http")) {
+      alert("Por favor ingresa un enlace válido que empiece con http o https");
+      return;
+    }
+    const newCard = new Card(
+      { name: formData.input1, link: formData.input2 },
+      "#card-template",
+      handleCardClick
+    );
+    const cardElement = newCard.generateCard();
+    cardSection.addItem(cardElement);
+  }
+  popupForm.close();
+});
+popupForm.setEventListeners();
+
+// Validación
+const formElement = document.querySelector("#popup .form");
+const formValidator = new FormValidator(validationConfig, formElement);
+formValidator.enableValidation();
+
+// Referencias
 const popupTitle = document.getElementById("popup-title");
 const input1 = document.getElementById("input1");
 const input2 = document.getElementById("input2");
-const closeButton = document.getElementById("popup-close");
 
-let currentAction = "";
+// Botón editar perfil
+const editButton = document.querySelector(".profile__EditButton");
+editButton.addEventListener("click", () => {
+  currentAction = "edit";
 
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
-
-initialCards.forEach((data) => {
-  const card = new Card(data, "#card-template");
-  const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
-});
-
-const validator = new FormValidator(
-  {
-    formSelector: ".form",
-    inputSelector: ".form__input",
-    submitButtonSelector: ".popup__button",
-    inactiveButtonClass: "popup__button_disabled",
-    inputErrorClass: "popup__input_type_error",
-    errorClass: "popup__error_visible",
-  },
-  formElement,
-);
-validator.enableValidation();
-
-function abrirPopup(button) {
-  popup.classList.add("popup--show");
-
-  currentAction = button.classList.contains("profile__EditButton")
-    ? "edit"
-    : "add";
-
-  popupTitle.textContent = button.getAttribute("data-title");
   input1.value = "";
   input2.value = "";
-  input1.placeholder = button.getAttribute("data-placeholder1");
-  input2.placeholder = button.getAttribute("data-placeholder2");
 
-  guardarButton.textContent = currentAction === "edit" ? "Guardar" : "Crear";
-}
+  // Cambiar type dinámicamente
+  input1.type = "text";
+  input2.type = "text";
 
-function cerrarPopupFormulario() {
-  popup.classList.remove("popup--show");
-}
+  input1.placeholder = editButton.getAttribute("data-placeholder1");
+  input2.placeholder = editButton.getAttribute("data-placeholder2");
 
-guardarButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const val1 = input1.value.trim();
-  const val2 = input2.value.trim();
+  popupTitle.textContent = editButton.getAttribute("data-title");
 
-  if (currentAction === "edit") {
-    profileName.textContent = val1;
-    profileAcerca.textContent = val2;
-  } else if (currentAction === "add") {
-    const card = new Card({ name: val1, link: val2 }, "#card-template");
-    const cardElement = card.generateCard();
-    cardsContainer.prepend(cardElement);
-  }
-
-  cerrarPopupFormulario();
+  popupForm.open();
 });
 
-editButton.addEventListener("click", () => abrirPopup(editButton));
-addButton.addEventListener("click", () => abrirPopup(addButton));
-closeButton.addEventListener("click", cerrarPopupFormulario);
+// Botón añadir tarjeta
+const addButton = document.querySelector(".profile__AddButton");
+addButton.addEventListener("click", () => {
+  currentAction = "add";
 
-document
-  .getElementById("image-popup-close")
-  .addEventListener("click", cerrarPopupImagen);
-document
-  .getElementById("image-popup-overlay")
-  .addEventListener("click", cerrarPopupImagen);
+  input1.value = "";
+  input2.value = "";
+
+  // Cambiar type dinámicamente
+  input1.type = "text";
+  input2.type = "url";
+
+  input1.placeholder = addButton.getAttribute("data-placeholder1");
+  input2.placeholder = addButton.getAttribute("data-placeholder2");
+
+  popupTitle.textContent = addButton.getAttribute("data-title");
+
+  popupForm.open();
+});

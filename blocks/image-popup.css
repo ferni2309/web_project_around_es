@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -54,6 +54,11 @@
   cursor: pointer;
   z-index: 20;
 }
+
+.image-popup.popup--show {
+  display: flex;
+}
+
 @media screen and (min-width: 320px) and (max-width: 400px) {
   .image-popup__close {
     top: -15px;

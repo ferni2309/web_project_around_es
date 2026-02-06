@@ -77,12 +77,12 @@
 }
 
 .input1-error {
-  min-height: 20px; /* reserva espacio para el mensaje */
-  visibility: hidden; /* oculto pero ocupa espacio */
+  min-height: 20px;
+  visibility: hidden;
 }
 
 .input1-error.popup__error_visible {
-  visibility: visible; /* se muestra cuando hay error */
+  visibility: visible;
 }
 
 #input2 {
@@ -90,12 +90,12 @@
 }
 
 .input2-error {
-  min-height: 20px; /* reserva espacio para el mensaje */
-  visibility: hidden; /* oculto pero ocupa espacio */
+  min-height: 20px;
+  visibility: hidden;
 }
 
 .input2-error.popup__error_visible {
-  visibility: visible; /* se muestra cuando hay error */
+  visibility: visible;
 }
 
 .popup__content input:focus {

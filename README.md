@@ -19,16 +19,17 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 - Validación de formularios con el objeto `ValidityState` y visualización de errores.
 - Limpieza de listeners para evitar fugas de memoria.
 - Accesibilidad mejorada con mensajes de error y control de foco.
-- Uso de **Programación Orientada a Objetos (POO)** con clases `Card` y `FormValidator`.
+- Uso de **Programación Orientada a Objetos (POO)** con clases `Card`, `FormValidator`, `Popup`, `PopupWithForm`, `PopupWithImage`, `Section` y `UserInfo`.
 
 ## 3. Funcionalidades interactivas
 
 - Los usuarios pueden añadir nuevas tarjetas, eliminarlas o dar "me gusta".
 - Al hacer clic en una imagen, se abre un popup ampliado con la foto y su título.
 - Los popups se pueden cerrar con el botón de cerrar, clic fuera del contenido o presionando la tecla Escape.
+- El scroll de la página se bloquea al abrir un popup y se restaura al cerrarlo, evitando saltos en el layout gracias a la compensación del ancho de la barra de scroll.
 - El botón de guardar (`popup__button`) se desactiva automáticamente y solo se activa si los campos del formulario son válidos.
 - Los inputs muestran mensajes de error personalizados solo después de que el usuario comienza a escribir.
-- En el modo "Agregar lugar", el campo de nombre tiene un `maxlength` de 30 y el campo de imagen requiere una URL válida.
+- En el modo "Agregar lugar", el campo de nombre tiene un `maxlength` de **40** y el campo de imagen requiere una URL válida.
 - En el modo "Editar perfil", los campos vuelven a sus configuraciones originales (`maxlength` y `type`).
 
 ## 4. Validación de formularios
@@ -44,7 +45,7 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 - **HTML5** con estructura semántica y atributos de accesibilidad (`alt`, `lang`, `title`, `viewport`).
 - **CSS3** con metodología **BEM** y uso de `normalize.css` para estandarizar estilos.
 - **JavaScript ES6+**:
-  - Clases `Card` y `FormValidator`.
+  - Clases `Card`, `FormValidator`, `Popup`, `PopupWithForm`, `PopupWithImage`, `Section` y `UserInfo`.
   - Validación universal de formularios.
   - Manipulación del DOM para renderizar tarjetas y popups.
   - Uso correcto de `const` y `let`.
@@ -63,6 +64,7 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 - ✔️ Se puede añadir tarjeta con Enter.
 - ✔️ Validación con `ValidityState` y atributos HTML5.
 - ✔️ Accesibilidad: estados `:hover` y atributos `alt` en imágenes.
+- ✔️ Bloqueo de scroll al abrir popups y compensación del ancho de la barra para evitar saltos.
 
 ## 7. Enlace al proyecto
 
@@ -71,3 +73,13 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 ## 8. Repositorio
 
 🔗 [Código fuente en GitHub](https://github.com/ferni2309/web_project_around_es.git)
+
+---
+
+## 9. Cambios recientes
+
+- Migración de funciones sueltas (`utils.js`) a una arquitectura basada en clases (`Popup`, `PopupWithForm`, `PopupWithImage`, `Section`, `UserInfo`).
+- Corrección del comportamiento del popup de imagen: ahora se abre y se cierra correctamente con botón, overlay o tecla Escape.
+- Eliminación del atributo `style="display: none"` en el HTML del popup de imagen, reemplazado por control mediante la clase `popup--show`.
+- Implementación de bloqueo de scroll al abrir popups y compensación del ancho de la barra de scroll para evitar saltos en el layout.
+- Ajuste en el README: el campo de nombre en el modo "Agregar lugar" tiene `maxlength="40"` (antes se documentaba como 30).

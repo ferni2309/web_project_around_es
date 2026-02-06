@@ -1,8 +1,9 @@
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -17,28 +18,20 @@ export default class Card {
     const image = card.querySelector(".cards__imagen");
     const heart = card.querySelector(".group__imagen");
 
-    if (deleteBtn) {
-      deleteBtn.addEventListener("click", () => {
-        card.remove();
-      });
-    }
+    deleteBtn.addEventListener("click", () => {
+      card.remove();
+    });
 
-    if (heart) {
-      heart.addEventListener("click", () => {
-        const isLiked = heart.classList.toggle("liked");
-        heart.src = isLiked
-          ? "./images/Group-corazón-Active.svg"
-          : "./images/Group-corazón.svg";
-      });
-    }
+    heart.addEventListener("click", () => {
+      const isLiked = heart.classList.toggle("liked");
+      heart.src = isLiked
+        ? "/web_project_around_es/images/Group-corazón-Active.svg"
+        : "/web_project_around_es/images/Group-corazón.svg";
+    });
 
-    if (image) {
-      image.addEventListener("click", () => {
-        import("../scripts/utils.js").then(({ abrirPopupImagen }) => {
-          abrirPopupImagen(image);
-        });
-      });
-    }
+    image.addEventListener("click", () => {
+      this._handleCardClick({ link: this._link, name: this._name });
+    });
   }
 
   generateCard() {
