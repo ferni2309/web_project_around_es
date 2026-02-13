@@ -23,10 +23,19 @@
               alt="Perfil de un hombre viejo con gorro rojo"
               class="profile__imagen"
             />
+            <button
+              type="button"
+              class="profile__EditAvatar"
+              >
+              <img
+              src="/web_project_around_es/images/EditAvatar.png"
+              alt="Editar imagen de avatar"
+              />
+            </button>
           </div>
           <div class="profile__info">
             <h1 class="profile__name" id="profileName">
-              Fernando Orozco Rodríguez
+              Nombre
             </h1>
             <button
               type="submit"
@@ -38,7 +47,7 @@
               <img src="/web_project_around_es/images/EditButton.png" alt="Editar perfil" />
             </button>
             <h2 class="profile__acerca-de-mi" id="profileAcerca">
-              Tecnico Especializado
+              Acerca de mi
             </h2>
           </div>
           <button
@@ -46,8 +55,7 @@
             class="profile__AddButton"
             data-title="Nuevo lugar"
             data-placeholder1="Título"
-            data-placeholder2="Enlace a la imagen"
-          >
+            data-placeholder2="Enlace a la imagen">
             <img
               src="/web_project_around_es/images/addButton.png"
               alt="Es un + que hace referencia a agregar"
@@ -120,7 +128,34 @@
           <p class="image-popup__caption" id="image-popup-caption"></p>
         </div>
       </div>
-
+      <div class="popup" id="avatar-popup">
+  <div class="popup__content avatar-popup__content">
+    <button class="popup__close">
+      <img src="/web_project_around_es/images/Close-Icon.png" alt="Cerrar" />
+    </button>
+    <h2 class="popup__header avatar-popup__header">Actualizar foto de perfil</h2>
+    <form class="form avatar-form">
+      <input
+        type="url"
+        id="avatar-input"
+        class="form__input"
+        placeholder="Enlace a la nueva foto"
+        required
+      />
+      <span class="form__input-error avatar-input-error"></span>
+      <button type="submit" class="popup__button avatar-popup__button">Guardar</button>
+    </form>
+  </div>
+</div>
+       <div class="popup" id="confirm-popup">
+  <div class="popup__content confirm-popup__content">
+    <button class="popup__close">
+      <img src="/web_project_around_es/images/Close-Icon.png" alt="Cerrar" />
+    </button>
+    <h2 class="popup__header confirm-popup__header">¿Estás seguro?</h2>
+    <button type="button" class="popup__button confirm-popup__button">Sí</button>
+  </div>
+</div>
       <footer class="footer">
         <p class="footer__copyright">&copy; 2025 Around The U.S.</p>
       </footer>

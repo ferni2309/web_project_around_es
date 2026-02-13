@@ -1,0 +1,53 @@
+.confirm-popup__content {
+  width: 430px;
+  height: 181px;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.confirm-popup__header {
+  width: 358px;
+  height: 23px;
+  margin-top: 34px;
+  margin-left: 36px;
+  margin-right: 36px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 38px;
+}
+
+.confirm-popup__button {
+  width: 358px;
+  height: 50px;
+  margin-left: 36px;
+  margin-right: 36px;
+  margin-bottom: 36px;
+  margin-top: 0;
+  background-color: #000;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+}
+
+#confirm-popup .popup__close {
+  position: absolute;
+  top: -28px;
+  right: -33px;
+  max-width: 40px;
+  max-height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.confirm-popup__button:hover {
+  opacity: 0.8;
+}

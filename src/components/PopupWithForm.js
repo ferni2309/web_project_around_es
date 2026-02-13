@@ -5,12 +5,14 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector(".form");
+    this._inputList = this._form.querySelectorAll(".form__input");
+    this._submitButton = this._form.querySelector(".popup__button");
+    this._submitButtonText = this._submitButton.textContent;
   }
 
   _getInputValues() {
-    const inputs = Array.from(this._form.querySelectorAll(".form__input"));
     const formValues = {};
-    inputs.forEach(input => {
+    this._inputList.forEach((input) => {
       formValues[input.id] = input.value;
     });
     return formValues;
@@ -24,8 +26,25 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  // Cambiar texto del botón mientras se guarda
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Guardando...";
+    } else {
+      this._submitButton.textContent = this._submitButtonText;
+    }
+  }
+
   close() {
     super.close();
     this._form.reset();
+    const errorElements = this._form.querySelectorAll(".form__input-error");
+    errorElements.forEach((errorElement) => {
+      errorElement.textContent = "";
+      errorElement.classList.remove("popup__error_visible");
+    });
+    if (this._submitButton) {
+      this._submitButton.disabled = true;
+    }
   }
 }

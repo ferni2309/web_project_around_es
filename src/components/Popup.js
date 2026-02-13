@@ -8,7 +8,7 @@ export default class Popup {
     this._popup.classList.add("popup--show");
     document.addEventListener("keydown", this._handleEscClose);
 
-    // Bloquear scroll y compensar barra
+
     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = `${scrollBarWidth}px`;
@@ -18,7 +18,7 @@ export default class Popup {
     this._popup.classList.remove("popup--show");
     document.removeEventListener("keydown", this._handleEscClose);
 
-    // Restaurar scroll
+
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
   }
@@ -30,20 +30,20 @@ export default class Popup {
   }
 
   setEventListeners() {
-    // Botón de cerrar (X)
+
     const closeButton = this._popup.querySelector(".popup__close, .image-popup__close");
     if (closeButton) {
       closeButton.addEventListener("click", () => this.close());
     }
 
-    // Caso 1: popup de formulario (clic en fondo)
+
     this._popup.addEventListener("mousedown", (evt) => {
       if (evt.target === this._popup) {
         this.close();
       }
     });
 
-    // Caso 2: popup de imagen (clic en overlay)
+
     const overlay = this._popup.querySelector(".image-popup__overlay");
     if (overlay) {
       overlay.addEventListener("click", () => this.close());

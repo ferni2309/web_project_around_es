@@ -19,7 +19,7 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 - Validación de formularios con el objeto `ValidityState` y visualización de errores.
 - Limpieza de listeners para evitar fugas de memoria.
 - Accesibilidad mejorada con mensajes de error y control de foco.
-- Uso de **Programación Orientada a Objetos (POO)** con clases `Card`, `FormValidator`, `Popup`, `PopupWithForm`, `PopupWithImage`, `Section` y `UserInfo`.
+- Uso de **Programación Orientada a Objetos (POO)** con clases `Card`, `FormValidator`, `Popup`, `PopupWithForm`, `PopupWithImage`, `Section`, `UserInfo` y `PopupWithConfirmation`.
 
 ## 3. Funcionalidades interactivas
 
@@ -27,10 +27,11 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 - Al hacer clic en una imagen, se abre un popup ampliado con la foto y su título.
 - Los popups se pueden cerrar con el botón de cerrar, clic fuera del contenido o presionando la tecla Escape.
 - El scroll de la página se bloquea al abrir un popup y se restaura al cerrarlo, evitando saltos en el layout gracias a la compensación del ancho de la barra de scroll.
-- El botón de guardar (`popup__button`) se desactiva automáticamente y solo se activa si los campos del formulario son válidos.
+- El botón de guardar (`popup__button`) cambia dinámicamente a **“Guardando…”** mientras se envían datos al servidor y vuelve a su estado original al finalizar.
 - Los inputs muestran mensajes de error personalizados solo después de que el usuario comienza a escribir.
 - En el modo "Agregar lugar", el campo de nombre tiene un `maxlength` de **40** y el campo de imagen requiere una URL válida.
 - En el modo "Editar perfil", los campos vuelven a sus configuraciones originales (`maxlength` y `type`).
+- En el modo "Actualizar avatar", se valida que el enlace sea correcto y se guarda en el servidor, manteniéndose al recargar la página.
 
 ## 4. Validación de formularios
 
@@ -45,7 +46,7 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 - **HTML5** con estructura semántica y atributos de accesibilidad (`alt`, `lang`, `title`, `viewport`).
 - **CSS3** con metodología **BEM** y uso de `normalize.css` para estandarizar estilos.
 - **JavaScript ES6+**:
-  - Clases `Card`, `FormValidator`, `Popup`, `PopupWithForm`, `PopupWithImage`, `Section` y `UserInfo`.
+  - Clases `Card`, `FormValidator`, `Popup`, `PopupWithForm`, `PopupWithImage`, `Section`, `UserInfo`, `PopupWithConfirmation`.
   - Validación universal de formularios.
   - Manipulación del DOM para renderizar tarjetas y popups.
   - Uso correcto de `const` y `let`.
@@ -59,12 +60,13 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 - ✔️ Funciones con nombres verbales (`abrirPopupImagen`, `cerrarPopupFormulario`).
 - ✔️ Popups creados en HTML/CSS, no dinámicamente.
 - ✔️ Tarjetas iniciales generadas vía JavaScript.
-- ✔️ Botón de "Me gusta" alterna estados.
-- ✔️ Botón de eliminar funciona correctamente.
+- ✔️ Botón de "Me gusta" alterna estados y se sincroniza con el servidor.
+- ✔️ Botón de eliminar funciona correctamente y solo aparece en tarjetas del usuario.
 - ✔️ Se puede añadir tarjeta con Enter.
 - ✔️ Validación con `ValidityState` y atributos HTML5.
 - ✔️ Accesibilidad: estados `:hover` y atributos `alt` en imágenes.
 - ✔️ Bloqueo de scroll al abrir popups y compensación del ancho de la barra para evitar saltos.
+- ✔️ Feedback visual en botones de formularios con “Guardando…” durante la carga.
 
 ## 7. Enlace al proyecto
 
@@ -78,8 +80,10 @@ Esta es una página web responsiva e interactiva que simula una red social de ex
 
 ## 9. Cambios recientes
 
-- Migración de funciones sueltas (`utils.js`) a una arquitectura basada en clases (`Popup`, `PopupWithForm`, `PopupWithImage`, `Section`, `UserInfo`).
+- Migración de funciones sueltas (`utils.js`) a una arquitectura basada en clases (`Popup`, `PopupWithForm`, `PopupWithImage`, `Section`, `UserInfo`, `PopupWithConfirmation`).
 - Corrección del comportamiento del popup de imagen: ahora se abre y se cierra correctamente con botón, overlay o tecla Escape.
 - Eliminación del atributo `style="display: none"` en el HTML del popup de imagen, reemplazado por control mediante la clase `popup--show`.
 - Implementación de bloqueo de scroll al abrir popups y compensación del ancho de la barra de scroll para evitar saltos en el layout.
-- Ajuste en el README: el campo de nombre en el modo "Agregar lugar" tiene `maxlength="40"` (antes se documentaba como 30).
+- Ajuste en el README: el campo de nombre en el modo "Agregar lugar" tiene `maxlength="40"`.
+- Implementación de actualización de avatar con `PATCH /users/me/avatar`, validación de URL y sincronización con servidor.
+- Mejora de experiencia de usuario: botones de formularios muestran “Guardando…” mientras se envían datos.
