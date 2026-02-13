@@ -31,13 +31,13 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
- updateAvatar(avatarLink) {
-  return fetch(`${this._baseUrl}/users/me/avatar`, {
-    method: "PATCH",
-    headers: this._headers,
-    body: JSON.stringify({ avatar: avatarLink }),
-  }).then(this._checkResponse);
-}
+  updateAvatar(avatarLink) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ avatar: avatarLink }),
+    }).then(this._checkResponse);
+  }
 
   addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -55,16 +55,16 @@ export default class Api {
   }
 
   likeCard(cardId) {
-  return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-    method: "PUT",
-    headers: this._headers,
-  }).then(this._checkResponse);
-}
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-unlikeCard(cardId) {
-  return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-    method: "DELETE",
-    headers: this._headers,
-  }).then(this._checkResponse);
-}
+  unlikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 }
