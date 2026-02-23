@@ -42,7 +42,7 @@ export default class Card {
     this._api.likeCard(this._id)
       .then((updatedCard) => {
         heart.classList.add("liked");
-        heart.src = "./src/images/Group-corazón-Active.svg";
+        heart.src = "./images/Group-corazón-Active.svg";
         this._isLiked = updatedCard.isLiked;
       })
       .catch((err) => console.log(err));
@@ -50,7 +50,7 @@ export default class Card {
     this._api.unlikeCard(this._id)
       .then((updatedCard) => {
         heart.classList.remove("liked");
-        heart.src = "./src/images/Group-corazón.svg";
+        heart.src = "./images/Group-corazón.svg";
         this._isLiked = updatedCard.isLiked;
       })
       .catch((err) => console.log(err));
@@ -78,12 +78,11 @@ export default class Card {
 
   if (this._isLiked) {
   heart.classList.add("liked");
-  heart.src = "./src/images/Group-corazón-Active.svg";
+  heart.src = "./images/Group-corazón-Active.svg";
 } else {
   heart.classList.remove("liked");
-  heart.src = "./src/images/Group-corazón.svg";
+  heart.src = "./images/Group-corazón.svg";
 }
-
 
   if (this._ownerId !== this._currentUserId) {
     deleteBtn.style.display = "none";
