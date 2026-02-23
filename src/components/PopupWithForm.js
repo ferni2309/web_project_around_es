@@ -26,7 +26,6 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  // Cambiar texto del botón mientras se guarda
   renderLoading(isLoading) {
     if (isLoading) {
       this._submitButton.textContent = "Guardando...";
