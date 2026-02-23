@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>"Alrededor de los EE.UU."</title>
+    <link rel="stylesheet" href="./page/index.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img
+          src="./images/Logo.png"
+          alt="Logo que dice: Around the U.S."
+          class="header__logo"
+        />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <div class="profile__avatar">
+            <img
+              src="./images/profile.jpg"
+              alt="Perfil de un hombre viejo con gorro rojo"
+              class="profile__imagen"
+            />
+            <button type="button" class="profile__EditAvatar">
+              <img
+                src="./images/EditAvatar.png"
+                alt="Editar imagen de avatar"
+              />
+            </button>
+          </div>
+          <div class="profile__info">
+            <h1 class="profile__name" id="profileName">Nombre</h1>
+            <button
+              type="submit"
+              class="profile__EditButton"
+              data-title="Editar perfil"
+              data-placeholder1="Nombre"
+              data-placeholder2="Acerca"
+            >
+              <img src="./images/EditButton.png" alt="Editar perfil" />
+            </button>
+            <h2 class="profile__acerca-de-mi" id="profileAcerca">
+              Acerca de mi
+            </h2>
+          </div>
+          <button
+            type="submit"
+            class="profile__AddButton"
+            data-title="Nuevo lugar"
+            data-placeholder1="Título"
+            data-placeholder2="Enlace a la imagen"
+          >
+            <img
+              src="./images/addButton.png"
+              alt="Es un + que hace referencia a agregar"
+            />
+          </button>
+          <div class="popup" id="popup">
+            <div class="popup__content">
+              <button class="popup__close" id="popup-close">
+                <img src="./images/Close-Icon.png" alt="Cierra el popup" />
+              </button>
+              <div class="popup__header">
+                <h2 id="popup-title"></h2>
+              </div>
+              <form class="form">
+                <label class="form__field">
+                  <input
+                    type="text"
+                    id="input1"
+                    class="form__input"
+                    required
+                    minlength="2"
+                    maxlength="40"
+                  />
+                  <span class="form__input-error input1-error"></span>
+                  <input
+                    type="text"
+                    id="input2"
+                    class="form__input"
+                    required
+                    minlength="2"
+                    maxlength="200"
+                  />
+                  <span class="form__input-error input2-error"></span>
+                </label>
+                <button
+                  type="submit"
+                  class="popup__button"
+                  id="guardar"
+                  disabled
+                >
+                  Guardar
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <section class="elements"></section>
+      </main>
+      <template id="card-template">
+        <div class="cards">
+          <button class="elements__delete"></button>
+          <img class="cards__imagen" src="" alt="" />
+          <div class="group">
+            <h2 class="group__text"></h2>
+            <img
+              class="group__imagen"
+              src="./images/Group-corazón.svg"
+              alt="Like"
+            />
+          </div>
+        </div>
+      </template>
+      <div class="image-popup" id="image-popup">
+        <div class="image-popup__overlay" id="image-popup-overlay"></div>
+        <div class="image-popup__content">
+          <button class="image-popup__close" id="image-popup-close">
+            <img src="./images/Close-Icon.png" alt="Cierra el popup" />
+          </button>
+          <img src=" " alt="Imagen ampliada" id="image-popup-img" />
+          <p class="image-popup__caption" id="image-popup-caption"></p>
+        </div>
+      </div>
+      <div class="popup popup_type_avatar" id="avatar-popup">
+        <div class="popup__content">
+          <button class="popup__close">
+            <img src="./images/Close-Icon.png" alt="Cerrar" />
+          </button>
+          <h2 class="popup__header">Actualizar foto de perfil</h2>
+          <form class="form">
+            <input
+              type="url"
+              id="avatar-input"
+              class="form__input"
+              placeholder="Enlace a la nueva foto"
+              required
+            />
+            <span class="form__input-error avatar-input-error"></span>
+            <button type="submit" class="popup__button">Guardar</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_type_confirm" id="confirm-popup">
+        <div class="popup__content">
+          <button class="popup__close">
+            <img src="./images/Close-Icon.png" alt="Cerrar" />
+          </button>
+          <h2 class="popup__header">¿Estás seguro?</h2>
+          <button type="submit" class="popup__button">Sí</button>
+        </div>
+      </div>
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2025 Around The U.S.</p>
+      </footer>
+    </div>
+    <script type="module" src="./page/index.js"></script>
+  </body>
+</html>
